@@ -20,9 +20,24 @@ namespace WpfDatabase
     /// </summary>
     public partial class MainWindow : Window
     {
+        OleDbConnection cn;
         public MainWindow()
         {
             InitializeComponent();
+            cn = new OleDbConnection(< Provider = Microsoft.ACE.OLEDB.12.0; Data Source = CUserswadhwakeDocumentsDatabase11.accdb >);
+
+        }
+
+        
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            string query = "select * from Assets";
+
+            OleDbCommand cmd = new OleDbCommand(query, cn);
+
+            cn.Open();
+            OleDbDataReader read = cmd.ExecuteReader();
         }
     }
 }
